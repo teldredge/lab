@@ -93,9 +93,10 @@ data:
   # ROOK_CSI_RBD_POD_LABELS: "key1=value1,key2=value2"
 
   # (Optional) Ceph Provisioner NodeAffinity.
+############---LOOK HERE---############
   #CSI_PROVISIONER_NODE_AFFINITY: "role=storage-node; storage=rook, ceph"
   #CSI_PROVISIONER_NODE_AFFINITY: "role=storage-node"
-  CSI_PROVISIONER_NODE_AFFINITY: "node-role.kubernetes.io/storage-node="
+  #CSI_PROVISIONER_NODE_AFFINITY: "node-role.kubernetes.io/storage-node="
   # (Optional) CEPH CSI provisioner tolerations list. Put here list of taints you want to tolerate in YAML format.
   # CSI provisioner would be best to start on the same nodes as other ceph daemons.
   # CSI_PROVISIONER_TOLERATIONS: |
@@ -106,6 +107,7 @@ data:
   #     key: node-role.kubernetes.io/etcd
   #     operator: Exists
   # (Optional) Ceph CSI plugin NodeAffinity.
+############---LOOK HERE---############ 
   # CSI_PLUGIN_NODE_AFFINITY: "role=storage-node; storage=rook, ceph"
   # (Optional) CEPH CSI plugin tolerations list. Put here list of taints you want to tolerate in YAML format.
   # CSI plugins need to be started on all the nodes where the clients need to mount the storage.
@@ -344,11 +346,12 @@ spec:
         # (Optional) Rook Agent priority class name to set on the pod(s)
         # - name: AGENT_PRIORITY_CLASS_NAME
         #   value: "<PriorityClassName>"
+############---LOOK HERE---############        
         # (Optional) Rook Agent NodeAffinity.
-        - name: AGENT_NODE_AFFINITY
+        #- name: AGENT_NODE_AFFINITY
         #  value: "role=storage-node; storage=rook,ceph"
         #  value: "role=storage-node"
-          value: "node-role.kubernetes.io/storage-node="
+        #  value: "node-role.kubernetes.io/storage-node="
         # (Optional) Rook Agent mount security mode. Can by `Any` or `Restricted`.
         # `Any` uses Ceph admin credentials by default/fallback.
         # For using `Restricted` you must have a Ceph secret in each namespace storage should be consumed from and
@@ -385,10 +388,11 @@ spec:
         # - name: DISCOVER_PRIORITY_CLASS_NAME
         #   value: "<PriorityClassName>"
         # (Optional) Discover Agent NodeAffinity.
-        - name: DISCOVER_AGENT_NODE_AFFINITY
+############---LOOK HERE---############        
+        #- name: DISCOVER_AGENT_NODE_AFFINITY
         #  value: "role=storage-node; storage=rook, ceph"
         #  value: "role=storage-node"
-          value: "node-role.kubernetes.io/storage-node="
+        #  value: "node-role.kubernetes.io/storage-node="
         # (Optional) Discover Agent Pod Labels.
         # - name: DISCOVER_AGENT_POD_LABELS
         #   value: "key1=value1,key2=value2"
