@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-client-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: go-client-test
+  template:
+    metadata:
+      labels:
+        name: go-client-test
+    spec:
+      containers:
+      - name: application
+        image: thomaseldredge/go-client-test
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 3000
