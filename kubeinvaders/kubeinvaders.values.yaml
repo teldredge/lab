@@ -1,0 +1,50 @@
+# Default namespace target
+target_namespace: "mayastor, default"
+
+# Default values for kubeinvaders.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: kubeinvaders
+
+clusterRole:
+  create: true
+  # The name of a cluster role to bind to; if not set and create is
+  # true, a name based on fullname is generated
+  name: kubeinvaders
+
+replicaCount: 1
+
+image:
+  repository: luckysideburn/kubeinvaders
+  tag: v1.4
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  #type: LoadBalancer
+  port: 8080
+  #port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hostName: kubeinvaders.local
+  tls:
+  #  secretName: kubeinvaders.local
+
+resources: {}
+nodeSelector: {}
+tolerations: []

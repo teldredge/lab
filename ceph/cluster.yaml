@@ -166,8 +166,22 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: node-role.kubernetes.io/storage-node
-              operator: Exists
+            - key: role
+              operator: In
+              values:
+              - storage-node
+      podAffinity:
+      podAntiAffinity:
+      topologySpreadConstraints:
+      tolerations:
+      - key: storage-node
+        operator: Exists    
+#      nodeAffinity:
+#        requiredDuringSchedulingIgnoredDuringExecution:
+#          nodeSelectorTerms:
+#          - matchExpressions:
+#           - key: node-role.kubernetes.io/storage-node
+#             operator: Exists
 #             - key: storage-node
 #               operator: In
 #              values:
