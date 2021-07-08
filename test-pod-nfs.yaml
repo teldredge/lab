@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod-nfs
+spec:
+  volumes:
+  - name: local-storage
+#  - name: test-storage
+    persistentVolumeClaim:
+      claimName: testpvc-nfs000
+  containers:
+  - name: hello-container
+    image: busybox
+    command:
+       - sh
+       - -c
+       - 'while true; do echo "`date` [`hostname`] Hello from OpenEBS Local PV." >> /mnt/store/greet.txt; sleep $(($RANDOM % 5 + 300)); done'
+    volumeMounts:
+    - mountPath: /mnt/store
+#    - mountPath: /usr/whatever
+      name: local-storage
+#      name: test-storage
